@@ -1,122 +1,171 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function AuthPage() {
+  const [page, setPage] = useState("signup");
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f5f5f5",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          width: "380px",
+          background: "#fff",
+          padding: "30px",
+          borderRadius: "10px",
+          boxShadow: "0 5px 15px rgba(0,0,0,0.15)",
+        }}
+      >
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+          {page === "signup"
+            ? "Create Account"
+            : page === "login"
+              ? "Login"
+              : "Forgot Password"}
+        </h2>
 
-      <div className="ticks"></div>
+        {/* Signup */}
+        {page === "signup" && (
+          <>
+            <input
+              type="text"
+              placeholder="Full Name"
+              style={inputStyle}
+            />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <input
+              type="email"
+              placeholder="Email"
+              style={inputStyle}
+            />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+            <input
+              type="password"
+              placeholder="Password"
+              style={inputStyle}
+            />
+
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              style={inputStyle}
+            />
+
+            <button style={buttonStyle}>Create Account</button>
+
+            <p style={textStyle}>
+              Already have an account?{" "}
+              <span
+                style={linkStyle}
+                onClick={() => setPage("login")}
+              >
+                Login
+              </span>
+            </p>
+          </>
+        )}
+
+        {/* Login */}
+        {page === "login" && (
+          <>
+            <input
+              type="email"
+              placeholder="Email"
+              style={inputStyle}
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              style={inputStyle}
+            />
+
+            <button style={buttonStyle}>Login</button>
+
+            <p style={textStyle}>
+              <span
+                style={linkStyle}
+                onClick={() => setPage("forgot")}
+              >
+                Forgot Password?
+              </span>
+            </p>
+
+            <p style={textStyle}>
+              Don't have an account?{" "}
+              <span
+                style={linkStyle}
+                onClick={() => setPage("signup")}
+              >
+                Sign Up
+              </span>
+            </p>
+          </>
+        )}
+
+        {/* Forgot Password */}
+        {page === "forgot" && (
+          <>
+            <input
+              type="email"
+              placeholder="Enter your Email"
+              style={inputStyle}
+            />
+
+            <button style={buttonStyle}>
+              Send Reset Link
+            </button>
+
+            <p style={textStyle}>
+              <span
+                style={linkStyle}
+                onClick={() => setPage("login")}
+              >
+                Back to Login
+              </span>
+            </p>
+          </>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default App
+const inputStyle = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "15px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "15px",
+  boxSizing: "border-box",
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "12px",
+  background: "#0d6efd",
+  color: "#fff",
+  border: "none",
+  borderRadius: "6px",
+  fontSize: "16px",
+  cursor: "pointer",
+};
+
+const textStyle = {
+  textAlign: "center",
+  marginTop: "15px",
+};
+
+const linkStyle = {
+  color: "#0d6efd",
+  cursor: "pointer",
+  fontWeight: "bold",
+};
